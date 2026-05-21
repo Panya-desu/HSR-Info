@@ -1,0 +1,248 @@
+/* Characters Page */
+.search-bar-container {
+  margin-bottom: 40px;
+  background: white;
+  padding: 20px 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.search-input {
+  flex: 0 0 220px;
+  /* Fixed width for search input */
+  padding: 10px 16px;
+  border-radius: 30px;
+  border: 2px solid transparent;
+  outline: none;
+  background: var(--bg-page);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  font-size: 15px;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+}
+
+.filters-wrapper {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.filters-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 8px 20px rgba(24, 247, 165, 0.1);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.filter-divider {
+  width: 2px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.filter-options {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.filter-btn {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  min-width: 34px;
+  height: 34px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.filter-btn:hover {
+  border-color: var(--primary);
+  background: var(--bg-page);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(24, 247, 165, 0.25);
+}
+
+.filter-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.filter-btn.active img {
+  filter: brightness(0) invert(1);
+}
+
+.search-input::placeholder {
+  color: #aebdb4;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.character-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.character-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(52, 211, 153, 0.2);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+.card-image-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--card-image-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.character-card:hover .character-image {
+  transform: scale(1.05);
+}
+
+.card-info {
+  padding: 12px;
+  background: white;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.character-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e3a47;
+  width: 100%;
+  text-align: center;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.6em;
+  line-height: 1.3;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+
+.star-icon {
+  fill: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+/* Floating Icons on Card */
+.card-floating-icons {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.floating-icon-box {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.character-card:hover .floating-icon-box {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+}
+
+.floating-icon-box img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.character-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

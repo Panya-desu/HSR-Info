@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #18f7a5;
+  /* Vibrant Mint/Emerald */
+  --primary-dark: #059669;
+  --accent: #fbbf24;
+  /* Vibrant Ribbon Yellow */
+  --bg-page: #e4f1e1;
+  /* Very Bright Mint White */
+  --sidebar-bg: #f5f5f5;
+  --nav-active-bg: #18e7ba;
+  --nav-active-text: #065f46;
+  --text-main: #134e4a;
+  --text-muted: #64748b;
+  --card-bg: #ffffff;
+  --card-image-bg: linear-gradient(135deg, #B9BABF 0%, #ABEEE4 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-size: 16px;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: var(--sidebar-bg);
+  padding: 30px 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-item {
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.nav-item:hover {
+  background-color: #f0fdf7;
+  color: var(--primary);
+}
+
+.nav-item.active {
+  background-color: var(--nav-active-bg);
+  color: var(--nav-active-text);
+  box-shadow: 0 4px 15px rgba(52, 211, 153, 0.25);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  overflow-x: hidden;
+}
+
+.characters-page,
+.admin-page,
+.login-page,
+.detail-page,
+.admin-edit-page {
+  padding: 40px 40px;
+  /* Increased top padding to 40px */
+}
+

@@ -1,0 +1,142 @@
+/* Lightcone Page specific height overrides to prevent global scrollbars */
+.lightcone-detail-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 40px 40px 20px 40px;
+}
+
+.lightcone-detail-page .detail-container.expanded {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px 40px 40px;
+}
+
+.lightcone-detail-page .detail-main-info {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.lightcone-detail-page .detail-visual-wrapper {
+  flex: 1.4;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.lightcone-detail-page .splash-container.floating {
+  height: 100%;
+  aspect-ratio: 904 / 1260;
+  max-width: 100%;
+  background: transparent;
+  border-radius: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightcone-detail-page .splash-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.lightcone-detail-page .detail-content-panel {
+  flex: 1;
+  min-width: 0;
+  background-color: white;
+  padding: 32px 28px;
+  border-radius: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.stat-label-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightcone-detail-page .base-stats-panel {
+  padding-top: 30px;
+  border-top: 2px solid #f8fafc;
+}
+
+.lightcone-detail-page .base-stats-panel h3 {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.detail-ability-section {
+  margin-top: 8px;
+  padding: 16px 0 0 0;
+  border-radius: 0px;
+}
+
+.ability-title {
+  font-size: 18px;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ability-title::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.ability-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #475569;
+  white-space: pre-line;
+}
+
+/* STAT TEXT */
+.lightcone-detail-page .stat-val {
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.lightcone-detail-page .stat-name {
+  color: #64748b;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .lightcone-detail-page .detail-main-info {
+    grid-template-columns: 1fr;
+  }
+
+  .lightcone-detail-page .detail-content-panel {
+    max-width: 100%;
+  }
+}
