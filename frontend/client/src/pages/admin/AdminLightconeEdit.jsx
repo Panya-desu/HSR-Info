@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronLeft, Save, Upload, Image } from 'lucide-react';
+import { ChevronLeft, Save, Upload, Image, Eye } from 'lucide-react';
 import { slugify } from '../../utils/slugify';
 
 export default function AdminLightconeEdit() {
@@ -155,9 +155,16 @@ export default function AdminLightconeEdit() {
   return (
     <div className="admin-edit-page">
       <div className="admin-header">
-        <Link to="/admin/lightcones" className="action-btn" style={{ background: '#f1f5f9', color: '#64748b', textDecoration: 'none', width: 'fit-content' }}>
-          <ChevronLeft size={20} /> Back to List
-        </Link>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <Link to="/admin/lightcones" className="action-btn" style={{ background: '#f1f5f9', color: '#64748b', textDecoration: 'none', width: 'fit-content' }}>
+            <ChevronLeft size={20} /> Back to List
+          </Link>
+          {isEdit && (
+            <Link to={`/admin/lightcones/${name}`} className="action-btn" style={{ background: '#e0f2fe', color: '#0284c7', textDecoration: 'none', width: 'fit-content' }}>
+              <Eye size={20} /> View Lightcone
+            </Link>
+          )}
+        </div>
         <h1>{isEdit ? 'Edit Lightcone' : 'Add New Lightcone'}</h1>
         <button onClick={handleSubmit} disabled={saving} className="add-btn">
           <Save size={20} /> {saving ? 'Saving...' : 'Save Lightcone'}
