@@ -161,7 +161,7 @@ export default function AdminLightconeEdit() {
           </Link>
           {isEdit && (
             <Link to={`/admin/lightcones/${name}`} className="action-btn" style={{ background: '#e0f2fe', color: '#0284c7', textDecoration: 'none', width: 'fit-content' }}>
-              <Eye size={20} /> View Lightcone
+              View Lightcone
             </Link>
           )}
         </div>
