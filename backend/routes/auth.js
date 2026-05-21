@@ -34,7 +34,9 @@ router.post('/login', loginLimiter, async (req, res) => {
             res.cookie('adminToken', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax', // Use lax for localhost/CORS compatibility
+                sameSite: process.env.NODE_ENV === 'production'
+                    ? 'None'
+                    : 'lax',
                 maxAge: 24 * 60 * 60 * 1000 // 24 hours
             });
 
