@@ -19,7 +19,7 @@ const PORT = process.env.PORT;
 app.use(helmet());
 app.use(cookieParser());
 
-const allowedOrigin = process.env.FRONTEND_URL || "http://localhost:5173";
+const allowedOrigin = process.env.FRONTEND_URL || "http://localhost:5001";
 app.use(cors({
     origin: allowedOrigin,
     credentials: true
@@ -53,7 +53,7 @@ app.use((err, req, res, next) => {
     console.error("GLOBAL ERROR:", err);
     if (err.message) console.error("ERROR MESSAGE:", err.message);
     if (err.stack) console.error("STACK:", err.stack);
-    res.status(err.status || 500).json({ 
+    res.status(err.status || 500).json({
         message: err.message || "Internal Server Error",
         error: process.env.NODE_ENV === 'development' ? err : {}
     });
