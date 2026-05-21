@@ -14,7 +14,7 @@ const authRoutes = require("./routes/auth");
 const lightconesRoutes = require("./routes/lightcones");
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.use(helmet());
 app.use(cookieParser());
@@ -34,7 +34,13 @@ if (!MONGODB_URI) {
 }
 
 mongoose.connect(MONGODB_URI)
-    .then(() => console.log("MongoDB connected"))
+    .then(() => {
+        console.log("MongoDB connected");
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+            console.log(`http://localhost:${PORT}`);
+        })
+    })
     .catch(err => console.log(err));
 
 app.get('/', (req, res) => {
@@ -59,7 +65,3 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`http://localhost:${PORT}`);
-})
