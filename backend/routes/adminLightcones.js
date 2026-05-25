@@ -20,7 +20,7 @@ const lcUploadFields = [
 
 router.get("/", auth, async (req, res) => {
     try {
-        const lightcones = await Lightcone.find().sort({ star: -1, name: 1 });
+        const lightcones = await Lightcone.find().sort({ version: -1, star: -1, name: 1 });
         res.json(lightcones);
     } catch (err) {
         res.status(500).json({ message: err.message });

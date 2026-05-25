@@ -15,7 +15,7 @@ function buildFlexibleRegex(str) {
 // READ ALL
 router.get("/", async (req, res) => {
     try {
-        const lightcones = await Lightcone.find().sort({ star: -1, name: 1 });
+        const lightcones = await Lightcone.find().sort({ version: -1, star: -1, name: 1 });
         res.json(lightcones);
     } catch (error) {
         res.status(500).json({ message: error.message });
