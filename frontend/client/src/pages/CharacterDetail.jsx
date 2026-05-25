@@ -150,7 +150,7 @@ export default function CharacterDetail() {
                 <div key={index} className="skill-card-detailed">
                   <div className="skill-card-main">
                     <div className="skill-card-header">
-                      <span className="skill-type-tag">Skill : {skill.type}</span>
+                      <span className="skill-type-tag">{skill.type}</span>
                       <h4>{skill.name}</h4>
                     </div>
                     <p>{skill.description}</p>
