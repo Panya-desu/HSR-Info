@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ChevronLeft, Save, Plus, Trash2, Upload, Image } from 'lucide-react';
 import { slugify } from '../../utils/slugify';
@@ -39,6 +39,30 @@ export default function AdminCharacterEdit() {
   const [types, setTypes] = useState([]);
   const [stats, setStats] = useState([]);
   const [saving, setSaving] = useState(false);
+
+  const blobUrlsRef = useRef(new Set());
+
+  const createBlobUrl = (file) => {
+    const url = URL.createObjectURL(file);
+    blobUrlsRef.current.add(url);
+    return url;
+  };
+
+  const revokeBlobUrl = (url) => {
+    if (url && typeof url === 'string' && url.startsWith('blob:')) {
+      URL.revokeObjectURL(url);
+      blobUrlsRef.current.delete(url);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      blobUrlsRef.current.forEach(url => {
+        URL.revokeObjectURL(url);
+      });
+      blobUrlsRef.current.clear();
+    };
+  }, []);
 
   useEffect(() => {
     if (!token) {
@@ -128,9 +152,12 @@ export default function AdminCharacterEdit() {
     const file = e.target.files[0];
     if (!file) return;
 
-    const previewUrl = URL.createObjectURL(file);
+    const previewUrl = createBlobUrl(file);
 
     if (type === 'traces') {
+      const oldUrl = previews.traces[index];
+      revokeBlobUrl(oldUrl);
+
       const newTraces = [...formData.traces];
       newTraces[index] = { ...newTraces[index], image: file };
       setFormData({ ...formData, traces: newTraces });
@@ -139,6 +166,9 @@ export default function AdminCharacterEdit() {
       newTracePreviews[index] = previewUrl;
       setPreviews({ ...previews, traces: newTracePreviews });
     } else if (type === 'eidolons') {
+      const oldUrl = previews.eidolons[index];
+      revokeBlobUrl(oldUrl);
+
       const newEidolons = [...formData.eidolons];
       newEidolons[index] = { ...newEidolons[index], image: file };
       setFormData({ ...formData, eidolons: newEidolons });
@@ -147,6 +177,9 @@ export default function AdminCharacterEdit() {
       newEidolonPreviews[index] = previewUrl;
       setPreviews({ ...previews, eidolons: newEidolonPreviews });
     } else {
+      const oldUrl = previews[field];
+      revokeBlobUrl(oldUrl);
+
       setFormData({ ...formData, [field]: file });
       setPreviews({ ...previews, [field]: previewUrl });
     }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ChevronLeft, Save, Upload, Image, Eye } from 'lucide-react';
 import { slugify } from '../../utils/slugify';
@@ -29,6 +29,30 @@ export default function AdminLightconeEdit() {
 
   const [paths, setPaths] = useState([]);
   const [saving, setSaving] = useState(false);
+
+  const blobUrlsRef = useRef(new Set());
+
+  const createBlobUrl = (file) => {
+    const url = URL.createObjectURL(file);
+    blobUrlsRef.current.add(url);
+    return url;
+  };
+
+  const revokeBlobUrl = (url) => {
+    if (url && typeof url === 'string' && url.startsWith('blob:')) {
+      URL.revokeObjectURL(url);
+      blobUrlsRef.current.delete(url);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      blobUrlsRef.current.forEach(url => {
+        URL.revokeObjectURL(url);
+      });
+      blobUrlsRef.current.clear();
+    };
+  }, []);
 
   useEffect(() => {
     if (!token) {
@@ -94,12 +118,12 @@ export default function AdminLightconeEdit() {
   const handleImageChange = (e, field) => {
     const file = e.target.files[0];
     if (file) {
+      const oldUrl = previews[field];
+      revokeBlobUrl(oldUrl);
+
+      const previewUrl = createBlobUrl(file);
       setFormData(prev => ({ ...prev, [field]: file }));
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviews(prev => ({ ...prev, [field]: reader.result }));
-      };
-      reader.readAsDataURL(file);
+      setPreviews(prev => ({ ...prev, [field]: previewUrl }));
     }
   };
 

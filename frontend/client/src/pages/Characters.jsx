@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Star } from 'lucide-react';
 import { slugify } from '../utils/slugify';
@@ -39,13 +39,15 @@ export default function Characters() {
     fetchData();
   }, [apiUrl]);
 
-  const filteredChars = characters.filter(c => {
-    const matchesSearch = c.name.toLowerCase().includes(search.toLowerCase());
-    const matchesPath = selectedPath === 'All' || c.path === selectedPath;
-    const matchesType = selectedType === 'All' || c.type === selectedType;
-    const matchesStar = selectedStar === 'All' || c.star === Number(selectedStar);
-    return matchesSearch && matchesPath && matchesType && matchesStar;
-  });
+  const filteredChars = useMemo(() => {
+    return characters.filter(c => {
+      const matchesSearch = c.name.toLowerCase().includes(search.toLowerCase());
+      const matchesPath = selectedPath === 'All' || c.path === selectedPath;
+      const matchesType = selectedType === 'All' || c.type === selectedType;
+      const matchesStar = selectedStar === 'All' || c.star === Number(selectedStar);
+      return matchesSearch && matchesPath && matchesType && matchesStar;
+    });
+  }, [characters, search, selectedPath, selectedType, selectedStar]);
 
   return (
     <div className="characters-page">

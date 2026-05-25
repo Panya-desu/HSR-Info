@@ -83,7 +83,7 @@ export default function AdminLightconeDetail() {
           <div className="detail-content-panel">
             <div className="detail-name-row">
               <h1 className="detail-name">{lightcone.name}</h1>
-              {lightcone.version && <span className="detail-version">v{lightcone.version}</span>}
+              {lightcone.version && <span className="detail-version">{lightcone.version}</span>}
             </div>
 
             <div className="detail-stars">

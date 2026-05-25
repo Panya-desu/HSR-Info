@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Star } from 'lucide-react';
 import { slugify } from '../utils/slugify';
@@ -34,12 +34,14 @@ export default function Lightcones() {
     fetchData();
   }, [apiUrl]);
 
-  const filteredLCs = lightcones.filter(lc => {
-    const matchesSearch = lc.name.toLowerCase().includes(search.toLowerCase());
-    const matchesPath = selectedPath === 'All' || lc.path === selectedPath;
-    const matchesStar = selectedStar === 'All' || lc.star === Number(selectedStar);
-    return matchesSearch && matchesPath && matchesStar;
-  });
+  const filteredLCs = useMemo(() => {
+    return lightcones.filter(lc => {
+      const matchesSearch = lc.name.toLowerCase().includes(search.toLowerCase());
+      const matchesPath = selectedPath === 'All' || lc.path === selectedPath;
+      const matchesStar = selectedStar === 'All' || lc.star === Number(selectedStar);
+      return matchesSearch && matchesPath && matchesStar;
+    });
+  }, [lightcones, search, selectedPath, selectedStar]);
 
   return (
     <div className="characters-page">

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const characterSchema = new mongoose.Schema({
-    name: String,
+    name: { type: String, index: true },
     version: String,
     path: String,
     type: String,

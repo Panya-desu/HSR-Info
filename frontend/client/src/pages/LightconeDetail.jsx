@@ -20,7 +20,7 @@ export default function LightconeDetail() {
         ]);
 
         if (!lcRes.ok) throw new Error("Lightcone not found");
-        
+
         const [lcData, pathsData] = await Promise.all([
           lcRes.json(),
           pathsRes.json()
@@ -66,9 +66,9 @@ export default function LightconeDetail() {
           <div className="detail-content-panel">
             <div className="detail-name-row">
               <h1 className="detail-name">{lightcone.name}</h1>
-              {lightcone.version && <span className="detail-version">v{lightcone.version}</span>}
+              {lightcone.version && <span className="detail-version">{lightcone.version}</span>}
             </div>
-            
+
             <div className="detail-stars">
               {[...Array(lightcone.star || 5)].map((_, i) => (
                 <Star key={i} size={20} className="star-icon" />

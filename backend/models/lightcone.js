@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const lightconeSchema = new mongoose.Schema({
-    name: String,
+    name: { type: String, index: true },
     version: String,
     star: Number,
     path: String,
