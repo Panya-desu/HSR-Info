@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { 
-  ChevronLeft, Edit2, Star, Heart, Sword, Shield, Zap, Target, 
-  ShieldAlert, Sparkles, RefreshCw, Activity, PlusCircle 
+import {
+  ChevronLeft, Edit2, Star, Heart, Sword, Shield, Zap, Target,
+  ShieldAlert, Sparkles, RefreshCw, Activity, PlusCircle
 } from 'lucide-react';
 import { slugify } from '../../utils/slugify';
 
@@ -34,13 +34,13 @@ export default function AdminCharacterDetail() {
           navigate('/login');
           return;
         }
-        
+
         const [pathsRes, typesRes, statsRes] = await Promise.all([
           fetch(`${apiUrl}/metadata/paths`),
           fetch(`${apiUrl}/metadata/types`),
           fetch(`${apiUrl}/metadata/stats`)
         ]);
-        
+
         const [charData, pathsData, typesData, statsData] = await Promise.all([
           charRes.json(),
           pathsRes.json(),
@@ -70,7 +70,7 @@ export default function AdminCharacterDetail() {
     if (statMetadata?.icon?.url) {
       return <img src={statMetadata.icon.url} alt={type} className="stat-icon-img" />;
     }
-    
+
     const iconSize = 32;
     switch (type) {
       case 'HP': return <Heart size={iconSize} className="stat-icon hp" />;
@@ -105,10 +105,10 @@ export default function AdminCharacterDetail() {
         <div className="detail-main-info">
           <div className="detail-visual-wrapper">
             <div className="splash-container floating">
-              <img 
-                src={character.image?.url || character.icon?.url} 
-                alt={character.name} 
-                className="splash-image" 
+              <img
+                src={character.image?.url || character.icon?.url}
+                alt={character.name}
+                className="splash-image"
               />
             </div>
           </div>
@@ -120,10 +120,10 @@ export default function AdminCharacterDetail() {
             </div>
             <div className="detail-stars">
               {[...Array(character.star || 5)].map((_, i) => (
-                <Star key={i} size={20} className="star-icon"  />
+                <Star key={i} size={20} className="star-icon" />
               ))}
             </div>
-            
+
             <div className="info-grid">
               <div className="info-item">
                 <span className="info-label">Element</span>
@@ -167,12 +167,12 @@ export default function AdminCharacterDetail() {
                 <div key={index} className="skill-card-detailed">
                   <div className="skill-card-main">
                     <div className="skill-card-header">
-                      <span className="skill-type-tag">Skill : {skill.type}</span>
+                      <span className="skill-type-tag">{skill.type}</span>
                       <h4>{skill.name}</h4>
                     </div>
                     <p>{skill.description}</p>
                   </div>
-                  
+
                   {(skill.energy || skill.toughness || skill.spChange) && (
                     <>
                       <div className="skill-card-divider" />
