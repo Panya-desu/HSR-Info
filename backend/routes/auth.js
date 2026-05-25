@@ -62,7 +62,7 @@ router.post('/logout', (req, res) => {
     res.clearCookie('adminToken', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax'
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'lax'
     });
     res.json({ message: 'Logged out successfully' });
 });
